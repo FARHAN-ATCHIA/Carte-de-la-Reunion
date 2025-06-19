@@ -62,10 +62,10 @@
 
         
     
-            var tile_layer_7007280e8d1144c0f688fe6e0c3343d3 = L.tileLayer(
-                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
-                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_4dd5ac64db02d14a326d94bc8fb9fc54);
+            var tile_layer_satellite = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {attribution: 'Tiles © Esri — Source: World Imagery',maxZoom: 19}
+            ).addTo(map_ce787a330bb8917cf216f08bd3a9d4ca);
         
     
             var marker_cluster_d39dfe7e0feef983471bed5deb06e0bc = L.markerClusterGroup(
