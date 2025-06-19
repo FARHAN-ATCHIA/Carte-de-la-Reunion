@@ -64,7 +64,10 @@
     
             var tile_layer_satellite = L.tileLayer(
                 "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-                {attribution: 'Tiles © Esri — Source: World Imagery',maxZoom: 19}
+                {
+                    attribution: 'Tiles © Esri — Source: World Imagery'
+                    maxZoom: 19
+                }
             ).addTo(map_ce787a330bb8917cf216f08bd3a9d4ca);
         
     
