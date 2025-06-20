@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Carte interactive - La Réunion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <style>
+    html, body { margin: 0; height: 100%; }
+    #map { width: 100%; height: 100vh; }
+    .logo { position: absolute; z-index: 1000; width: 100px; }
+    .logo.teka { top: 10px; left: 10px; }
+    .logo.farhan { bottom: 10px; right: 10px; }
+    .popup-title { font-weight: bold; text-decoration: underline; font-size: 16px; margin-bottom: 5px; }
+    .popup-section-title { font-weight: bold; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <img src="teka.png" alt="Teka Immo" class="logo teka" />
+  <img src="farhan.png" alt="Farhan Atchia" class="logo farhan" />
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script>
+    const map = L.map('map').setView([-21.1, 55.5], 10);
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles © Esri'
+    }).addTo(map);
+    L.Control.geocoder().addTo(map);
+
+    const villes = [
+      
+      {
+        nom: "Saint-Denis",
+        achat: {
+          appart: "2592",
+          maison: "3227",
+          villa: "4093.0",
+          terrain: "570.0"
+        },
+        location: {
+          appart: "18.0",
+          maison: "14.0",
+          villa: "18.0",
+          terrain: "2.0"
+        },
+        lat: -20.8789,
+        lon: 55.4481
+      },
+      
+      {
+        nom: "Sainte-Suzanne",
+        achat: {
+          appart: "1901",
+          maison: "1978",
+          villa: "2491.0",
+          terrain: "299.0"
+        },
+        location: {
+          appart: "17.0",
+          maison: "12.0",
+          villa: "13.0",
+          terrain: "5.0"
+        },
+        lat: -20.9006,
+        lon: 55.6103
+      },
+      
+      {
+        nom: "Sainte-Clotilde",
+        achat: {
+          appart: "2804",
+          maison: "3691",
+          villa: "3039.0",
+          terrain: "391.0"
+        },
+        location: {
+          appart: "13.0",
+          maison: "12.0",
+          villa: "12.0",
+          terrain: "nan"
+        },
+        lat: -20.8822,
+        lon: 55.4762
+      },
+      
+      {
+        nom: "Bras-Panon",
+        achat: {
+          appart: "1743",
+          maison: "1976",
+          villa: "3142.0",
+          terrain: "254.0"
+        },
+        location: {
+          appart: "10.0",
+          maison: "10.0",
+          villa: "13.0",
+          terrain: "nan"
+        },
+        lat: -20.9953,
+        lon: 55.6761
+      },
+      
+      {
+        nom: "Le Port",
+        achat: {
+          appart: "2644",
+          maison: "2514",
+          villa: "3723.0",
+          terrain: "352.0"
+        },
+        location: {
+          appart: "11.0",
+          maison: "21.0",
+          villa: "15.0",
+          terrain: "3.0"
+        },
+        lat: -20.9375,
+        lon: 55.2926
+      },
+      
+      {
+        nom: "La Possession",
+        achat: {
+          appart: "2793",
+          maison: "3567",
+          villa: "3722.0",
+          terrain: "332.0"
+        },
+        location: {
+          appart: "12.0",
+          maison: "12.0",
+          villa: "15.0",
+          terrain: "nan"
+        },
+        lat: -20.9243,
+        lon: 55.335
+      },
+      
+      {
+        nom: "Saint-Paul",
+        achat: {
+          appart: "5046",
+          maison: "3963",
+          villa: "5381.0",
+          terrain: "498.0"
+        },
+        location: {
+          appart: "21.0",
+          maison: "17.0",
+          villa: "17.0",
+          terrain: "nan"
+        },
+        lat: -21.0085,
+        lon: 55.265
+      },
+      
+      {
+        nom: "Saint-André",
+        achat: {
+          appart: "1735",
+          maison: "2154",
+          villa: "3606.0",
+          terrain: "248.0"
+        },
+        location: {
+          appart: "12.0",
+          maison: "10.0",
+          villa: "9.0",
+          terrain: "nan"
+        },
+        lat: -20.9639,
+        lon: 55.6504
+      },
+      
+      {
+        nom: "Saint-Benoît",
+        achat: {
+          appart: "1700",
+          maison: "1844",
+          villa: "2996.0",
+          terrain: "202.0"
+        },
+        location: {
+          appart: "13.0",
+          maison: "11.0",
+          villa: "11.0",
+          terrain: "0.33"
+        },
+        lat: -21.0385,
+        lon: 55.7178
+      },
+      
+      {
+        nom: "Saint-Louis",
+        achat: {
+          appart: "2384",
+          maison: "2309",
+          villa: "4419.0",
+          terrain: "225.0"
+        },
+        location: {
+          appart: "14.0",
+          maison: "13.0",
+          villa: "15.0",
+          terrain: "nan"
+        },
+        lat: -21.2766,
+        lon: 55.4144
+      },
+      
+      {
+        nom: "Saint-Pierre",
+        achat: {
+          appart: "3187",
+          maison: "3142",
+          villa: "4141.0",
+          terrain: "276.0"
+        },
+        location: {
+          appart: "17.0",
+          maison: "17.0",
+          villa: "14.0",
+          terrain: "nan"
+        },
+        lat: -21.3419,
+        lon: 55.4781
+      },
+      
+      {
+        nom: "Grand Coude",
+        achat: {
+          appart: "2011",
+          maison: "2218",
+          villa: "1395.0",
+          terrain: "136.0"
+        },
+        location: {
+          appart: "nan",
+          maison: "nan",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.36,
+        lon: 55.63
+      },
+      
+      {
+        nom: "Le Tampon",
+        achat: {
+          appart: "2170",
+          maison: "2429",
+          villa: "3894.0",
+          terrain: "210.0"
+        },
+        location: {
+          appart: "15.0",
+          maison: "15.0",
+          villa: "11.0",
+          terrain: "nan"
+        },
+        lat: -21.2786,
+        lon: 55.5226
+      },
+      
+      {
+        nom: "Saint-Joseph",
+        achat: {
+          appart: "1986",
+          maison: "2244",
+          villa: "2122.0",
+          terrain: "171.0"
+        },
+        location: {
+          appart: "13.0",
+          maison: "12.0",
+          villa: "13.0",
+          terrain: "nan"
+        },
+        lat: -21.3777,
+        lon: 55.6191
+      },
+      
+      {
+        nom: "Saint-Philippe",
+        achat: {
+          appart: "1914",
+          maison: "2247",
+          villa: "1350.0",
+          terrain: "173.0"
+        },
+        location: {
+          appart: "15.0",
+          maison: "12.0",
+          villa: "15.0",
+          terrain: "nan"
+        },
+        lat: -21.3438,
+        lon: 55.7003
+      },
+      
+      {
+        nom: "Le Tremblet",
+        achat: {
+          appart: "2031",
+          maison: "2152",
+          villa: "nan",
+          terrain: "nan"
+        },
+        location: {
+          appart: "12.0",
+          maison: "10.0",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.2917,
+        lon: 55.8053
+      },
+      
+      {
+        nom: "Cilaos",
+        achat: {
+          appart: "2400",
+          maison: "2153",
+          villa: "1901.0",
+          terrain: "178.0"
+        },
+        location: {
+          appart: "12.0",
+          maison: "12.0",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.1356,
+        lon: 55.4716
+      },
+      
+      {
+        nom: "Petite-Île",
+        achat: {
+          appart: "2082",
+          maison: "2611",
+          villa: "4212.0",
+          terrain: "219.0"
+        },
+        location: {
+          appart: "14.0",
+          maison: "14.0",
+          villa: "12.0",
+          terrain: "nan"
+        },
+        lat: -21.3627,
+        lon: 55.5501
+      },
+      
+      {
+        nom: "La Plaine-des-Palmistes",
+        achat: {
+          appart: "1962",
+          maison: "1942",
+          villa: "2351.0",
+          terrain: "184.0"
+        },
+        location: {
+          appart: "11.0",
+          maison: "13.0",
+          villa: "11.0",
+          terrain: "nan"
+        },
+        lat: -21.1407,
+        lon: 55.645
+      },
+      
+      {
+        nom: "Entre-Deux",
+        achat: {
+          appart: "2260",
+          maison: "2581",
+          villa: "3350.0",
+          terrain: "321.0"
+        },
+        location: {
+          appart: "16.0",
+          maison: "13.0",
+          villa: "14.0",
+          terrain: "nan"
+        },
+        lat: -21.2863,
+        lon: 55.4717
+      },
+      
+      {
+        nom: "Sainte-Rose",
+        achat: {
+          appart: "1938",
+          maison: "2036",
+          villa: "2596.0",
+          terrain: "127.0"
+        },
+        location: {
+          appart: "10.0",
+          maison: "11.0",
+          villa: "12.0",
+          terrain: "nan"
+        },
+        lat: -21.1272,
+        lon: 55.7922
+      },
+      
+      {
+        nom: "Langevin",
+        achat: {
+          appart: "2038",
+          maison: "2308",
+          villa: "3548.0",
+          terrain: "nan"
+        },
+        location: {
+          appart: "nan",
+          maison: "nan",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.3667,
+        lon: 55.6501
+      },
+      
+      {
+        nom: "Terre Sainte",
+        achat: {
+          appart: "3304",
+          maison: "3400",
+          villa: "5024.0",
+          terrain: "nan"
+        },
+        location: {
+          appart: "12.0",
+          maison: "10.0",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.345,
+        lon: 55.4789
+      },
+      
+      {
+        nom: "La Rivière",
+        achat: {
+          appart: "2355",
+          maison: "2370",
+          villa: "3440.0",
+          terrain: "160.0"
+        },
+        location: {
+          appart: "10.0",
+          maison: "9.0",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.2732,
+        lon: 55.4312
+      },
+      
+      {
+        nom: "Trois Bassins",
+        achat: {
+          appart: "3766",
+          maison: "3174",
+          villa: "3607.0",
+          terrain: "239.0"
+        },
+        location: {
+          appart: "19.0",
+          maison: "13.0",
+          villa: "12.0",
+          terrain: "nan"
+        },
+        lat: -21.1117,
+        lon: 55.315
+      },
+      
+      {
+        nom: "Saint-Leu",
+        achat: {
+          appart: "3792",
+          maison: "3695",
+          villa: "5574.0",
+          terrain: "225.0"
+        },
+        location: {
+          appart: "19.0",
+          maison: "19.0",
+          villa: "18.0",
+          terrain: "nan"
+        },
+        lat: -21.1791,
+        lon: 55.2875
+      },
+      
+      {
+        nom: "Les Avirons",
+        achat: {
+          appart: "3286",
+          maison: "3384",
+          villa: "3118.0",
+          terrain: "87.0"
+        },
+        location: {
+          appart: "17.0",
+          maison: "12.0",
+          villa: "12.0",
+          terrain: "nan"
+        },
+        lat: -21.2414,
+        lon: 55.3447
+      },
+      
+      {
+        nom: "Étang-Salé",
+        achat: {
+          appart: "3202",
+          maison: "3470",
+          villa: "5735.0",
+          terrain: "136.0"
+        },
+        location: {
+          appart: "17.0",
+          maison: "16.0",
+          villa: "19.0",
+          terrain: "nan"
+        },
+        lat: -21.263,
+        lon: 55.3562
+      },
+      
+      {
+        nom: "Salazie",
+        achat: {
+          appart: "1911",
+          maison: "1581",
+          villa: "1326.0",
+          terrain: "78.0"
+        },
+        location: {
+          appart: "12.0",
+          maison: "10.0",
+          villa: "nan",
+          terrain: "nan"
+        },
+        lat: -21.0035,
+        lon: 55.548
+      },
+      
+    ];
+
+    villes.forEach(ville => {
+      const popup = `
+        <div class="popup-title">${ville.nom}</div>
+        <div class="popup-section-title">🏠 Achat :</div>
+        Appartement : ${ville.achat.appart} €/m²<br />
+        Maison : ${ville.achat.maison} €/m²<br />
+        Villa : ${ville.achat.villa} €/m²<br />
+        Terrain : ${ville.achat.terrain} €/m²<br />
+        <div class="popup-section-title">📍 Location :</div>
+        Appartement : ${ville.location.appart} €/m²<br />
+        Maison : ${ville.location.maison} €/m²<br />
+        Villa : ${ville.location.villa} €/m²<br />
+        Terrain : ${ville.location.terrain} €/m²
+      `;
+      L.marker([ville.lat, ville.lon]).addTo(map).bindPopup(popup);
+    });
+  </script>
+</body>
+</html>
